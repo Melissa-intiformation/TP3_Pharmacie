@@ -2,6 +2,8 @@ package com.intiFormation;
 
 import java.util.*;
 
+import com.intiFormation.Exception.nbMedicamentNegException;
+
 public class Medicament
 {
 
@@ -25,18 +27,23 @@ public class Medicament
 		this.nom = nom;
 		this.prix = prix;
 		this.stock = stock;
+
 	}
 
-	public void ajoutStock()
+	public void ajoutStock() throws nbMedicamentNegException
 	{
 		System.out.println("Combien voulez-vous ajouter au stock ? ");
 		int ajoutStock = sc.nextInt();
-
-		stock += ajoutStock;
-		System.out.println("Nouveau stock : " + stock);
+		if (ajoutStock < 0)
+		{
+			throw new nbMedicamentNegException();
+		} else
+		{
+			stock += ajoutStock;
+			System.out.println("Nouveau stock : " + stock);
+		}
 
 	}
-
 
 	public String getNom()
 	{
@@ -66,6 +73,7 @@ public class Medicament
 	public void setStock(int stock)
 	{
 		this.stock = stock;
+
 	}
 
 	public int getId()
